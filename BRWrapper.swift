@@ -103,6 +103,11 @@ class BRWrapper: BRWrappable {
       bonds.addObject(bond)
    }
    
+   func delete(){
+      realm.beginWriteTransaction()
+      realm.deleteObject(backingModel)
+      realm.commitWriteTransaction()
+   }
 
    //MARK: - Implement
    func realmModelType() -> RLMObject.Type{ fatalError("realmModelType() should be implemented in supreclass") }
