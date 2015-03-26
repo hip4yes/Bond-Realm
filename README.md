@@ -1,7 +1,7 @@
 # Bond-Realm
 Binding from Bond to Realm made easy
 ##Why do I need it?
-Bond is a wonderful framework that makes it very easy to synchronize your dynamic models, view models to views. Realm on the other hand is the best framework for persistency. Bond works with in-memory objects whereas in most cases your models should persist somewhere and be updated based on user interaction. That's where Bond-Realm comes to help!
+[Bond](https://github.com/SwiftBond/Bond) is a wonderful framework that makes it very easy to synchronize your dynamic models, view models to views. [Realm](http://realm.io) on the other hand is the best framework for persistency. Bond works with in-memory objects whereas in most cases your models should persist somewhere and be updated based on user interaction. That's where Bond-Realm comes to help!
 Bond-Realm makes it easy to connect your Realm models to dynamic Bond models, so all changes made in your Bond models will be automatically saved to Realm.
 ##Example
 Let's say you are making Todo app and have a Realm todo model:
@@ -73,4 +73,16 @@ class CategoryModel: BRWrapper {
    }
 }
 ```
-All insertion/deletion in your todos array will be automatically update RealmCategoryModel's RLMArray of RealmTodoModel! Isn't it magic?
+All insertion/deletion in your todos array will be automatically update RealmCategoryModel's RLMArray of RealmTodoModel and assigning new TodoModel to mostImportantTodo will also update realm! Isn't it magic?
+##How to create, load and delete objects
+When you are using Bond-Realm you should not use your Realm classes directly. Instead you should work with your dynamic subclasses of `BRWrapper`.
+To create new object use simply `let todo = TodoModel()` (where TodoModel – is needed subclass of `BRWrapper`), it will create underlying `RealmTodoModel` and create bonds for all your properties.
+To delete object from realm call `todo.delete()`.
+To get all dynamic objects from Realm use: `let categories: DynamicArray<CategoryModel> = DynamicArrayFromAllObjectsOf(CategoryModel.self)`.
+##Installation
+Just add all swift files to your project
+##License
+MIT License
+Created by Nikita Arkhipov
+##How to contact
+If there is a bug, please open an Issue or contact me via nikitarkhipov@gmail.com. If you have any suggestions do the same. Pull requests are welcomed.
