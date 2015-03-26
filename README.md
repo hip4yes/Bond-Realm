@@ -85,6 +85,7 @@ To get all dynamic objects from Realm use: `let categories: DynamicArray<Categor
 Just add all swift files to your project
 ##License
 MIT License
+
 Created by Nikita Arkhipov
 ##How to contact
 If there is a bug, please open an Issue or contact me via nikitarkhipov@gmail.com. If you have any suggestions do the same. Pull requests are welcomed.
