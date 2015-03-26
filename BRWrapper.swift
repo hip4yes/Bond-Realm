@@ -11,11 +11,10 @@ import Realm
 
 protocol BRWrappable{
    init()
-   init(representative: Bool)
    init(realmModel: RLMObject)
    
    var backingModel: RLMObject! { get }
-   func realmModelType() -> RLMObject.Type
+   class func realmModelType() -> RLMObject.Type
 }
 
 class BRWrapper: BRWrappable {
@@ -25,16 +24,13 @@ class BRWrapper: BRWrappable {
    private let bonds = NSMutableArray()
    
    required init() {
-      let T = realmModelType()
+      let T = self.dynamicType.realmModelType()
       backingModel = T()
       realm.beginWriteTransaction()
       realm.addObject(self.backingModel)
       realm.commitWriteTransaction()
       createBonds()
    }
-   
-   /// Do not use this constructor directly. Made for allBondedObjects() function only
-   required init(representative: Bool){ }
    
    required init(realmModel: RLMObject){
       self.backingModel = realmModel
@@ -110,14 +106,13 @@ class BRWrapper: BRWrappable {
    }
 
    //MARK: - Implement
-   func realmModelType() -> RLMObject.Type{ fatalError("realmModelType() should be implemented in supreclass") }
+   class func realmModelType() -> RLMObject.Type{ fatalError("realmModelType() should be implemented in supreclass") }
    func createBonds(){ fatalError("createBonds() should be implemented in supreclass") }
 }
 
 extension RLMRealm{
    class func allBondedObjects<T: BRWrappable>(ofType: T.Type) -> [T]{
-      let obj = T(representative: true)
-      return obj.realmModelType().allObjects().map { T(realmModel: $0 as RLMObject) }
+      return T.realmModelType().allObjects().map { T(realmModel: $0 as RLMObject) }
    }
 }
 
