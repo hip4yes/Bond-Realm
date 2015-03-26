@@ -44,7 +44,7 @@ class TaskController: UIViewController {
    }
 }
 ```
-And that's it! All changes in `titleField` and `datePicker` will be automatically saved to your model and thent to Realm!
+And that's it! All changes in `titleField` and `datePicker` will be automatically saved to your model and then to Realm!
 ##One-to-one and one-to-many
 In the example bellow we were working with base types such as `String` and `NSDate`. What about one-to-one and one-to-many relationships? Rejoice, Bond-Realm has covered that!
 Let's say you have a Category class that has array of Todos and a reference to the most important Todo (which can change). Then your realm class will look as following:
