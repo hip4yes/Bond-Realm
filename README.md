@@ -77,7 +77,9 @@ All insertion/deletion in your todos array will be automatically update RealmCat
 ##How to create, load and delete objects
 When you are using Bond-Realm you should not use your Realm classes directly. Instead you should work with your dynamic subclasses of `BRWrapper`.
 To create new object use simply `let todo = TodoModel()` (where TodoModel – is needed subclass of `BRWrapper`), it will create underlying `RealmTodoModel` and create bonds for all your properties.
+
 To delete object from realm call `todo.delete()`.
+
 To get all dynamic objects from Realm use: `let categories: DynamicArray<CategoryModel> = DynamicArrayFromAllObjectsOf(CategoryModel.self)`.
 ##Installation
 Just add all swift files to your project
