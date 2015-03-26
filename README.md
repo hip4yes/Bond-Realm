@@ -9,7 +9,6 @@ Let's say you are making Todo app and have a Realm todo model:
 class RealmTodoModel: RLMObject {
    dynamic var title = ""
    dynamic var date = NSDate()
-   dynamic var extraDescription = RealmExtraDescription()
 }
 ```
 You are "dynamizing" it by creating new class:
@@ -20,7 +19,7 @@ class TodoModel : BRWrapper{
    let date = Dynamic(NSDate())
 
    //return type of realm model
-   override func realmModelType() -> RLMObject.Type { return RealmTodoModel.self }
+   override class func realmModelType() -> RLMObject.Type { return RealmTodoModel.self }
 
    //create bonds between TodoModel's dynamic properties to RealmTodoModel static properties so all changes in TodoModel will be automatically saved in Realm
    override func createBonds(){
@@ -64,7 +63,7 @@ class CategoryModel: BRWrapper {
    //And we also have DynamicArray of TodoModels instead of RLMArray of RealmTodoModels
    let todos = DynamicArray<TodoModel>([])
    
-   override func realmModelType() -> RLMObject.Type { return RealmCategoryModel.self }
+   override class func realmModelType() -> RLMObject.Type { return RealmCategoryModel.self }
 
    override func createBonds() {
       createBondFrom(title, toModelKeyPath: "title")
@@ -82,7 +81,7 @@ To delete object from realm call `todo.delete()`.
 
 To get all dynamic objects from Realm use: `let categories: DynamicArray<CategoryModel> = DynamicArrayFromAllObjectsOf(CategoryModel.self)`.
 ##Installation
-Just add all swift files to your project
+Add Realm and Bond to your project and then just add all swift files from this repository. 
 ##License
 MIT License
 
